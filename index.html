@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SerpentScan Pro | AI Diagnostic</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+</head>
+<body>
+
+<div class="app-wrapper">
+    <aside class="sidebar">
+        <h1>SerpentScan <span style="color: #10b981;">Pro</span></h1>
+        <p>AI-driven analysis for snake identification and bite wound diagnostics.</p>
+        
+        <div class="mode-container">
+            <button id="btn-snake" class="mode-btn active" onclick="setMode('snake')">Identify Snake</button>
+            <button id="btn-bite" class="mode-btn" onclick="setMode('bite')">Analyze Bite Mark</button>
+        </div>
+
+        <div class="emergency-tip">
+            <h4>💡 Emergency Tip</h4>
+            <p>If bitten, stay still. Movement helps venom travel faster through the lymphatic system.</p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="upload-card" onclick="document.getElementById('file-input').click()">
+            <input type="file" id="file-input" accept="image/*" hidden onchange="loadImage(event)">
+            <div id="upload-ui">
+                <div class="icon">🔍</div>
+                <h3 id="upload-title">Upload Snake Image</h3>
+                <p id="upload-desc">Ensure the photo is clear and well-lit.</p>
+            </div>
+            <img id="preview-image" src="" style="display: none;">
+        </div>
+
+        <button id="predict-btn" class="btn-primary" onclick="predict()" style="display: none;">Run AI Diagnostic</button>
+
+        <div id="result-panel" class="result-card">
+            <div class="result-header">
+                <h2 id="result-title">Analyzing...</h2>
+                <span id="severity-label">CALCULATING</span>
+            </div>
+            
+            <div class="severity-meter">
+                <div id="meter-fill" class="meter-fill"></div>
+                <div id="risk-bar" style="width: 100%; background: #eee; height: 10px; border-radius: 5px; margin-top: 5px;">
+    <div id="meter-fill" style="width: 0%; height: 100%; transition: width 0.5s;"></div>
+</div>
+            </div>
+
+            <div class="grid-info">
+                <div class="info-box">
+                    <strong>Category</strong>
+                    <p id="info-type">--</p>
+                </div>
+                <div class="info-box">
+                    <strong>Risk Level</strong>
+                    <p id="info-risk">--</p>
+                </div>
+            </div>
+
+            <div id="action-box" class="action-box">
+                <p id="action-text">Awaiting diagnostic results...</p>
+            </div>
+            
+            <div class="wound-guide">
+                <button id="download-btn" class="btn-secondary" onclick="generateReport()" style="width: 100%; margin-top: 15px; background: #64748b; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 600;">
+    📥 Download Medical Report (PDF)
+</button>
+                <p><small>Reference: Two distinct holes = Fangs. Row of dots = Teeth.</small></p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
