@@ -18,8 +18,20 @@
     </header>
 
     <main class="container">
-        <div class="upload-zone" id="drop-area" onclick="document.getElementById('file-input').click()">
-            <img id="view-img" src="" style="display:none;">
+       <div class="upload-card" onclick="document.getElementById('file-input').click()">
+    <div id="upload-ui">
+        <span style="font-size: 3rem;">📸</span>
+        <h3 id="upload-title">Upload Snake Image</h3>
+        <p>Click to browse or drag and drop</p>
+    </div>
+    <img id="preview-image" style="display: none; width: 100%; border-radius: 12px; margin-top: 10px;">
+</div>
+
+<button id="predict-btn" class="btn-primary" onclick="predict()" style="display: none; margin-top: 20px;">
+    🚀 Analyze Specimen
+</button>
+
+<input type="file" id="file-input" onchange="loadImage(event)" hidden accept="image/*">
             
             <div id="upload-ui">
                 <div class="icon">➕</div>
