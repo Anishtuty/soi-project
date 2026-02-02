@@ -18,6 +18,10 @@
     </header>
 
     <main class="container">
+        <div class="mode-switch" style="margin-bottom: 12px; display:flex; gap:8px;">
+            <button id="btn-snake" class="btn-mode active" onclick="setMode('snake')">🐍 Snake</button>
+            <button id="btn-bite" class="btn-mode" onclick="setMode('bite')">🩸 Bite</button>
+        </div>
        <div class="upload-card" onclick="document.getElementById('file-input').click()">
     <div id="upload-ui">
         <span style="font-size: 3rem;">📸</span>
@@ -33,18 +37,11 @@
 
 <input type="file" id="file-input" onchange="loadImage(event)" hidden accept="image/*">
             
-            <div id="upload-ui">
-                <div class="icon">➕</div>
-                <h3>UPLOAD PHOTO</h3>
-                <p>Species or Bite Wound</p>
-            </div>
-            
             <div id="scanner" class="scanner-wrap" style="display:none;">
                 <div class="line"></div>
                 <p>AI ANALYZING...</p>
             </div>
         </div>
-        <input type="file" id="file-input" onchange="startAutoProcess(event)" hidden>
 
         <section id="results" class="card result-card" style="display:none;">
             <div class="header-flex">

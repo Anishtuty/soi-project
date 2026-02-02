@@ -48,7 +48,7 @@ async function predict() {
     }
 
     // Show result panel and set to "Analyzing..."
-    document.getElementById('result-panel').style.display = 'block';
+    document.getElementById('results').style.display = 'block';
     document.getElementById('species-name').innerText = "Analyzing...";
 
     const predictions = await model.classify(img);
@@ -80,12 +80,19 @@ async function predict() {
 
 function updateUI(data, conf) {
     document.getElementById('species-name').innerText = data.name;
-    document.getElementById('info-risk').innerText = data.risk;
-    document.getElementById('info-type').innerText = currentMode.toUpperCase();
-    document.getElementById('action-text').innerText = data.action;
+    const riskBadge = document.getElementById('risk-badge');
+    if (riskBadge) {
+        riskBadge.innerText = data.risk;
+        riskBadge.style.background = data.color;
+    }
+    // Update action and confidence
+    const actionMsg = document.getElementById('action-msg');
+    if (actionMsg) actionMsg.innerText = data.action;
     document.getElementById('conf-val').innerText = conf;
     
     const fill = document.getElementById('meter-fill');
-    fill.style.width = conf + "%";
-    fill.style.background = data.color;
+    if (fill) {
+        fill.style.width = conf + "%";
+        fill.style.background = data.color;
+    }
 }
